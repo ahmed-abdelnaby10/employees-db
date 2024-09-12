@@ -1,16 +1,17 @@
 {
-  "name": "test-node-express-mongodb",
+  "name": "employees-db",
   "version": "1.0.0",
-  "main": "src/app/server.ts",
+  "main": "dist/app/server.js",
   "type": "module",
   "scripts": {
     "build": "tsc && node fix-imports.js",
     "start": "node dist/app/server.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "prestart": "npm run build"
   },
-  "author": "",
+  "author": "ahmed-mohamed",
   "license": "ISC",
-  "description": "",
+  "description": "Database for company's employees",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
