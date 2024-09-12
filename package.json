@@ -4,7 +4,7 @@
   "main": "src/app/server.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node fix-imports.js",
     "start": "node dist/app/server.js",
     "dev": "nodemon"
   },
