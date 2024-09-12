@@ -1,10 +1,10 @@
 import { Router } from "express";
-import uploadImage from "../middlewares/uploadImage.middleware";
-import { authVerification } from "../middlewares/authVerification.middleware";
-import { allowedTo } from "../middlewares/allowedTo.middleware";
-import { userRoles } from "../utils/userRoles";
-import { getAllEmloyeesController } from "../controllers/employees/getEmployees.controller";
-import { addEmployeeController, deleteEmployeeController, updateEmployeeController } from "../controllers/employees/employees.controller";
+import uploadImage from '../middlewares/uploadImage.middleware.js';
+import { authVerification } from '../middlewares/authVerification.middleware.js';
+import { allowedTo } from '../middlewares/allowedTo.middleware.js';
+import { userRoles } from '../utils/userRoles.js';
+import { getAllEmloyeesController } from '../controllers/employees/getEmployees.controller.js';
+import { addEmployeeController, deleteEmployeeController, updateEmployeeController } from '../controllers/employees/employees.controller.js';
 const router = Router();
 router.route('/employees')
     .get(authVerification, getAllEmloyeesController)

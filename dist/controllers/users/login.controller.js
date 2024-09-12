@@ -7,11 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../../models/user.model";
-import { formatResponse } from "../../utils/formatResponse";
-import { httpStatus } from "../../utils/httpStatusText";
+import User from '../../models/user.model.js';
+import { formatResponse } from '../../utils/formatResponse.js';
+import { httpStatus } from '../../utils/httpStatusText.js';
 import bcrypt from "bcryptjs";
-import generateToken from "../../utils/generateToken";
+import generateToken from '../../utils/generateToken.js';
 export const loginController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Employee from '../models/employee.model';
+import Employee from '../models/employee.model.js';
 export const searchEmployees = (searchText, minSalary, maxSalary) => __awaiter(void 0, void 0, void 0, function* () {
     const pipeline = [
         {

@@ -4,11 +4,11 @@ import cors from 'cors';
 import bodyParser from "body-parser";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { formatResponse } from "../utils/formatResponse";
-import { httpStatus } from "../utils/httpStatusText";
-import { connectDB } from "../config/db";
-import usersRouter from "../routes/user.route";
-import employeesRouter from "../routes/employee.route";
+import { formatResponse } from '../utils/formatResponse.js';
+import { httpStatus } from '../utils/httpStatusText.js';
+import { connectDB } from '../config/db.js';
+import usersRouter from '../routes/user.route.js';
+import employeesRouter from '../routes/employee.route.js';
 dotenv.config();
 export const app = express();
 // Define filename and dirname

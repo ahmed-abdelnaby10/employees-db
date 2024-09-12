@@ -1,11 +1,11 @@
 import { Router } from "express";
-import uploadImage from "../middlewares/uploadImage.middleware";
-import { registerController } from "../controllers/users/register.controller";
-import { loginController } from "../controllers/users/login.controller";
-import { authVerification } from "../middlewares/authVerification.middleware";
-import { allowedTo } from "../middlewares/allowedTo.middleware";
-import { userRoles } from "../utils/userRoles";
-import { deleteUserController, getAllUsersController, updateUserController } from "../controllers/users/users.controller";
+import uploadImage from '../middlewares/uploadImage.middleware.js';
+import { registerController } from '../controllers/users/register.controller.js';
+import { loginController } from '../controllers/users/login.controller.js';
+import { authVerification } from '../middlewares/authVerification.middleware.js';
+import { allowedTo } from '../middlewares/allowedTo.middleware.js';
+import { userRoles } from '../utils/userRoles.js';
+import { deleteUserController, getAllUsersController, updateUserController } from '../controllers/users/users.controller.js';
 const router = Router();
 router.post('/register', uploadImage().single('media'), registerController);
 router.post('/login', loginController);

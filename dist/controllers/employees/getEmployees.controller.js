@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Employee from "../../models/employee.model";
-import { formatResponse } from "../../utils/formatResponse";
-import { httpStatus } from "../../utils/httpStatusText";
+import Employee from '../../models/employee.model.js';
+import { formatResponse } from '../../utils/formatResponse.js';
+import { httpStatus } from '../../utils/httpStatusText.js';
 import mongoose from "mongoose";
 export const getAllEmloyeesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

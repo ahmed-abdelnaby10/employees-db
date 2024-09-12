@@ -7,11 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../../models/user.model";
-import { formatResponse } from "../../utils/formatResponse";
-import { httpStatus } from "../../utils/httpStatusText";
-import { userRoles } from "../../utils/userRoles";
-import { formatMediaFile } from "../../utils/meidaFormatter";
+import User from '../../models/user.model.js';
+import { formatResponse } from '../../utils/formatResponse.js';
+import { httpStatus } from '../../utils/httpStatusText.js';
+import { userRoles } from '../../utils/userRoles.js';
+import { formatMediaFile } from '../../utils/meidaFormatter.js';
 export const getAllUsersController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield User.find({}, { "__v": false, "password": false });

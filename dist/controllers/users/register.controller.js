@@ -7,13 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../../models/user.model";
-import { formatResponse } from "../../utils/formatResponse";
-import { httpStatus } from "../../utils/httpStatusText";
-import { checkRequiredFields } from "../../utils/checkRequiredFields";
+import User from '../../models/user.model.js';
+import { formatResponse } from '../../utils/formatResponse.js';
+import { httpStatus } from '../../utils/httpStatusText.js';
+import { checkRequiredFields } from '../../utils/checkRequiredFields.js';
 import bcrypt from "bcryptjs";
-import { formatMediaFile } from "../../utils/meidaFormatter";
-import generateToken from "../../utils/generateToken";
+import { formatMediaFile } from '../../utils/meidaFormatter.js';
+import generateToken from '../../utils/generateToken.js';
 export const registerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, email, password, c_password, phone, gender } = req.body;

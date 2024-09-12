@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import validator from "validator";
-import { userRoles } from "../utils/userRoles";
-import mediaSchema from "./media.model";
+import { userRoles } from '../utils/userRoles.js';
+import mediaSchema from './media.model.js';
 const { isEmail } = validator;
 const userSchema = new Schema({
     name: {

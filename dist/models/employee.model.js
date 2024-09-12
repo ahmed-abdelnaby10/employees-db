@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import mediaSchema from "./media.model";
+import mediaSchema from './media.model.js';
 const employeeSchema = new Schema({
     contact: {
         first_name: {

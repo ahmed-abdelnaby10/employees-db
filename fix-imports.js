@@ -17,7 +17,16 @@ function fixImports(directory) {
             } else if (path.extname(fullPath) === '.js') {
                 let content = fs.readFileSync(fullPath, 'utf-8');
                 
-                const updatedContent = content.replace(/from\s+['"](\.[^'"]+)\.ts['"]/g, "from '$1.js'");
+                const updatedContent = content.replace(
+                    /from\s+['"](\.[^'"]+)['"]/g,  // Match only relative imports
+                    (match, p1) => {
+                        // If the path doesn't already have a .js extension, add it
+                        if (!p1.endsWith('.js')) {
+                            return `from '${p1}.js'`;
+                        }
+                        return match;
+                    }
+                );
 
                 if (content !== updatedContent) {
                     fs.writeFileSync(fullPath, updatedContent, 'utf-8');

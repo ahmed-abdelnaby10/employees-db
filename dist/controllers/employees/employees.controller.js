@@ -7,11 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Employee from "../../models/employee.model";
-import { formatResponse } from "../../utils/formatResponse";
-import { httpStatus } from "../../utils/httpStatusText";
-import { formatMediaFile } from "../../utils/meidaFormatter";
-import { checkRequiredFields } from "../../utils/checkRequiredFields";
+import Employee from '../../models/employee.model.js';
+import { formatResponse } from '../../utils/formatResponse.js';
+import { httpStatus } from '../../utils/httpStatusText.js';
+import { formatMediaFile } from '../../utils/meidaFormatter.js';
+import { checkRequiredFields } from '../../utils/checkRequiredFields.js';
 export const addEmployeeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { contact, gender, birth_date, position, fixed_salary, rewards = 0, deductions = 0 } = req.body;
