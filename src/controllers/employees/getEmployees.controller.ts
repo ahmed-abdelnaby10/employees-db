@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 export const getAllEmloyeesController = async (req: Request, res: Response) => {
     try {
-        const { gender, position, minSalary, maxSalary, email, phone, name, id } = req.query;
+        const { gender, position, minSalary, maxSalary, email, phone, name, id, page = 1, limit = 6 } = req.query;
 
         if (id) {
             if (!mongoose.isValidObjectId(id as string)) {
@@ -62,11 +62,25 @@ export const getAllEmloyeesController = async (req: Request, res: Response) => {
             }));
         }
 
+        const pageNumber = parseInt(page as string, 10) || 1;
+        const limitNumber = parseInt(limit as string, 10) || 6;
+        const skip = (pageNumber - 1) * limitNumber;
+
         const totalEmployees = await Employee.countDocuments(query);
 
-        const employees = await Employee.find(query, { "__v": false });
+        const employees = await Employee.find(query, { "__v": false })
+            .skip(skip)
+            .limit(limitNumber);
+
+        const totalPages = Math.ceil(totalEmployees / limitNumber);
         
-        res.status(200).json(formatResponse(httpStatus.SUCCESS, { employees, total: totalEmployees }));
+        res.status(200).json(formatResponse(httpStatus.SUCCESS, { 
+            employees, 
+            total_employees: totalEmployees,
+            page: pageNumber,
+            limit: limitNumber,
+            total_pages: totalPages
+        }));
     } catch (error: any) {
         res.status(500).json(formatResponse(httpStatus.ERROR, null, error.message, 500));
     }

@@ -13,7 +13,7 @@ import { httpStatus } from '../../utils/httpStatusText.js';
 import mongoose from "mongoose";
 export const getAllEmloyeesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { gender, position, minSalary, maxSalary, email, phone, name, id } = req.query;
+        const { gender, position, minSalary, maxSalary, email, phone, name, id, page = 1, limit = 6 } = req.query;
         if (id) {
             if (!mongoose.isValidObjectId(id)) {
                 return res.status(404).json(formatResponse(httpStatus.ERROR, null, 'Employee not found.', 404));
@@ -59,9 +59,21 @@ export const getAllEmloyeesController = (req, res) => __awaiter(void 0, void 0, 
                 ]
             }));
         }
+        const pageNumber = parseInt(page, 10) || 1;
+        const limitNumber = parseInt(limit, 10) || 6;
+        const skip = (pageNumber - 1) * limitNumber;
         const totalEmployees = yield Employee.countDocuments(query);
-        const employees = yield Employee.find(query, { "__v": false });
-        res.status(200).json(formatResponse(httpStatus.SUCCESS, { employees, total: totalEmployees }));
+        const employees = yield Employee.find(query, { "__v": false })
+            .skip(skip)
+            .limit(limitNumber);
+        const totalPages = Math.ceil(totalEmployees / limitNumber);
+        res.status(200).json(formatResponse(httpStatus.SUCCESS, {
+            employees,
+            total_employees: totalEmployees,
+            page: pageNumber,
+            limit: limitNumber,
+            total_pages: totalPages
+        }));
     }
     catch (error) {
         res.status(500).json(formatResponse(httpStatus.ERROR, null, error.message, 500));
