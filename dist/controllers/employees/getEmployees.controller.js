@@ -13,7 +13,12 @@ import { httpStatus } from '../../utils/httpStatusText.js';
 import mongoose from "mongoose";
 export const getAllEmloyeesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { gender, position, minSalary, maxSalary, email, phone, name, id, page = 1, limit = 6 } = req.query;
+        const { gender, position, minSalary, maxSalary, email, phone, name, id, sortBy, order } = req.query;
+        const page = parseInt(req.query.page) || 1;
+        const limit = 6;
+        const skip = (page - 1) * limit;
+        const sortField = sortBy || "first_name";
+        const sortOrder = order === "desc" ? -1 : 1;
         if (id) {
             if (!mongoose.isValidObjectId(id)) {
                 return res.status(404).json(formatResponse(httpStatus.ERROR, null, 'Employee not found.', 404));
@@ -59,19 +64,18 @@ export const getAllEmloyeesController = (req, res) => __awaiter(void 0, void 0, 
                 ]
             }));
         }
-        const pageNumber = parseInt(page, 10) || 1;
-        const limitNumber = parseInt(limit, 10) || 6;
-        const skip = (pageNumber - 1) * limitNumber;
         const totalEmployees = yield Employee.countDocuments(query);
-        const employees = yield Employee.find(query, { "__v": false })
-            .skip(skip)
-            .limit(limitNumber);
-        const totalPages = Math.ceil(totalEmployees / limitNumber);
+        const employees = yield Employee.find(query)
+            .select('-__v')
+            .sort({ [sortField]: sortOrder })
+            .skip((page - 1) * limit)
+            .limit(limit);
+        const totalPages = Math.ceil(totalEmployees / limit);
         res.status(200).json(formatResponse(httpStatus.SUCCESS, {
             employees,
+            page,
+            limit,
             total_employees: totalEmployees,
-            page: pageNumber,
-            limit: limitNumber,
             total_pages: totalPages
         }));
     }

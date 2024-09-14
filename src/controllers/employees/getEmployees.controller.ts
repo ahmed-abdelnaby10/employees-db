@@ -6,7 +6,14 @@ import mongoose from "mongoose";
 
 export const getAllEmloyeesController = async (req: Request, res: Response) => {
     try {
-        const { gender, position, minSalary, maxSalary, email, phone, name, id, page = 1, limit = 6 } = req.query;
+        const { gender, position, minSalary, maxSalary, email, phone, name, id, sortBy, order } = req.query;
+
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = 6
+        const skip = (page - 1) * limit;
+
+        const sortField = sortBy as string || "first_name";
+        const sortOrder = order === "desc" ? -1 : 1; 
 
         if (id) {
             if (!mongoose.isValidObjectId(id as string)) {
@@ -62,23 +69,21 @@ export const getAllEmloyeesController = async (req: Request, res: Response) => {
             }));
         }
 
-        const pageNumber = parseInt(page as string, 10) || 1;
-        const limitNumber = parseInt(limit as string, 10) || 6;
-        const skip = (pageNumber - 1) * limitNumber;
-
         const totalEmployees = await Employee.countDocuments(query);
 
-        const employees = await Employee.find(query, { "__v": false })
-            .skip(skip)
-            .limit(limitNumber);
+        const employees = await Employee.find(query)
+            .select('-__v')
+            .sort({ [sortField]: sortOrder })
+            .skip((page - 1) * limit)
+            .limit(limit);
 
-        const totalPages = Math.ceil(totalEmployees / limitNumber);
+        const totalPages = Math.ceil(totalEmployees / limit)
         
         res.status(200).json(formatResponse(httpStatus.SUCCESS, { 
-            employees, 
+            employees,
+            page,
+            limit,
             total_employees: totalEmployees,
-            page: pageNumber,
-            limit: limitNumber,
             total_pages: totalPages
         }));
     } catch (error: any) {
