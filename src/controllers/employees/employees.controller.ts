@@ -76,7 +76,7 @@ export const updateEmployeeController = async (req: Request, res: Response) => {
 
         const { fixed_salary = targetEmployee.fixed_salary, rewards = targetEmployee.rewards, deductions = targetEmployee.deductions } = req.body;
 
-        const final_salary = fixed_salary + rewards - deductions;
+        const final_salary = parseInt(fixed_salary) + parseInt(rewards) - parseInt(deductions);
 
         const updatedEmployee = await Employee.findByIdAndUpdate(
             employeeId,

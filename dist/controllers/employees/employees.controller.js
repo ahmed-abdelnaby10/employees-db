@@ -69,7 +69,7 @@ export const updateEmployeeController = (req, res) => __awaiter(void 0, void 0, 
             return res.status(404).json(formatResponse(httpStatus.ERROR, null, "Employee not found.", 404));
         }
         const { fixed_salary = targetEmployee.fixed_salary, rewards = targetEmployee.rewards, deductions = targetEmployee.deductions } = req.body;
-        const final_salary = fixed_salary + rewards - deductions;
+        const final_salary = parseInt(fixed_salary) + parseInt(rewards) - parseInt(deductions);
         const updatedEmployee = yield Employee.findByIdAndUpdate(employeeId, {
             $set: Object.assign(Object.assign(Object.assign({}, req.body), { final_salary }), (media && { media }))
         }, { new: true, select: "-__v" });
