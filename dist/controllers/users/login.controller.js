@@ -32,6 +32,7 @@ export const loginController = (req, res) => __awaiter(void 0, void 0, void 0, f
                 role: user.role,
                 created_at: user.created_at,
                 updated_at: user.updated_at,
+                media: user.media
             };
             res.status(200).json(formatResponse(httpStatus.SUCCESS, { user: userResponse, token }, 'User logined successfully', 200));
         }
