@@ -36,7 +36,7 @@ export const updateUserController = (req, res) => __awaiter(void 0, void 0, void
         if (req.file) {
             media = formatMediaFile(req.file);
         }
-        const updatedUser = yield User.updateOne({ _id: userId }, { $set: Object.assign(Object.assign({}, req.body), (media && { media })) }, { new: true }).select("-password -__v");
+        const updatedUser = yield User.findByIdAndUpdate(userId, { $set: Object.assign(Object.assign({}, req.body), (media && { media })) }, { new: true }).select("-password -__v");
         res.status(200).json(formatResponse(httpStatus.SUCCESS, { user: updatedUser }, "User updated successfully", 200));
     }
     catch (error) {

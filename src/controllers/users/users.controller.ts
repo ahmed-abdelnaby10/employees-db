@@ -31,7 +31,7 @@ export const updateUserController = async (req: Request, res: Response) => {
             media = formatMediaFile(req.file as Express.Multer.File);
         }
 
-        const updatedUser = await User.updateOne({_id: userId}, {$set: {
+        const updatedUser = await User.findByIdAndUpdate(userId, {$set: {
             ...req.body,
             ...(media && { media })
         }},
