@@ -5,7 +5,7 @@ import { loginController } from '../controllers/users/login.controller.js';
 import { authVerification } from '../middlewares/authVerification.middleware.js';
 import { allowedTo } from '../middlewares/allowedTo.middleware.js';
 import { userRoles } from '../utils/userRoles.js';
-import { deleteUserController, getAllUsersController, updateUserController } from '../controllers/users/users.controller.js';
+import { changePasswordController, deleteUserController, getAllUsersController, updateUserController } from '../controllers/users/users.controller.js';
 const router = Router();
 router.post('/register', uploadImage().single('media'), registerController);
 router.post('/login', loginController);
@@ -14,4 +14,6 @@ router.route('/users')
 router.route('/users/:userId')
     .delete(authVerification, allowedTo(userRoles.MANAGER), deleteUserController)
     .patch(authVerification, uploadImage().single('media'), updateUserController);
+router.route('/users/:userId/change-password')
+    .patch(authVerification, changePasswordController);
 export default router;

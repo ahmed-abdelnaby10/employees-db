@@ -6,6 +6,7 @@ import { authVerification } from "../middlewares/authVerification.middleware"
 import { allowedTo } from "../middlewares/allowedTo.middleware"
 import { userRoles } from "../utils/userRoles"
 import { 
+    changePasswordController,
     deleteUserController, 
     getAllUsersController, 
     updateUserController 
@@ -22,5 +23,8 @@ router.route('/users')
 router.route('/users/:userId')
     .delete(authVerification, allowedTo(userRoles.MANAGER), deleteUserController)
     .patch(authVerification, uploadImage().single('media'), updateUserController)
+
+router.route('/users/:userId/change-password')
+    .patch(authVerification, changePasswordController);
 
 export default router
