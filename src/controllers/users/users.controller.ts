@@ -7,15 +7,6 @@ import { formatMediaFile } from "../../utils/meidaFormatter";
 import bcrypt from "bcryptjs"
 import { checkRequiredFields } from "../../utils/checkRequiredFields";
 
-export const getAllUsersController = async (req: Request, res: Response) => {
-    try {
-        const users = await User.find({}, {"__v": false, "password": false});
-        res.status(200).json(formatResponse(httpStatus.SUCCESS, { users }));
-    } catch (error: any) {
-        res.status(500).json(formatResponse(httpStatus.ERROR, null, error.message, 500));
-    }
-};
-
 export const updateUserController = async (req: Request, res: Response) => {
     try {
         const { role } = req.body;

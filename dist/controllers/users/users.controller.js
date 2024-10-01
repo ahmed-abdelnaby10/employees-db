@@ -14,15 +14,6 @@ import { userRoles } from '../../utils/userRoles.js';
 import { formatMediaFile } from '../../utils/meidaFormatter.js';
 import bcrypt from "bcryptjs";
 import { checkRequiredFields } from '../../utils/checkRequiredFields.js';
-export const getAllUsersController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const users = yield User.find({}, { "__v": false, "password": false });
-        res.status(200).json(formatResponse(httpStatus.SUCCESS, { users }));
-    }
-    catch (error) {
-        res.status(500).json(formatResponse(httpStatus.ERROR, null, error.message, 500));
-    }
-});
 export const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {

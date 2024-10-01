@@ -8,9 +8,9 @@ import { userRoles } from "../utils/userRoles"
 import { 
     changePasswordController,
     deleteUserController, 
-    getAllUsersController, 
     updateUserController 
 } from "../controllers/users/users.controller"
+import { getAllUsersController } from "../controllers/users/getUsers.controller"
 
 const router = Router()
 
