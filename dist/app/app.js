@@ -2,8 +2,6 @@ import express from "express";
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from "body-parser";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
 import { formatResponse } from '../utils/formatResponse.js';
 import { httpStatus } from '../utils/httpStatusText.js';
 import { connectDB } from '../config/db.js';
@@ -13,14 +11,10 @@ dotenv.config();
 export const app = express();
 // Connect to MongoDB
 connectDB();
-// Define filename and dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 // Middlewares
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/images', express.static(join(__dirname, '..', '..', 'public', 'images')));
 // Routes
 app.use('/api/auth', usersRouter);
 app.use('/api/employees', employeesRouter);

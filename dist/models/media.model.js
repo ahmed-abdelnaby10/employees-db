@@ -8,10 +8,6 @@ const mediaSchema = new Schema({
         type: String,
         required: true
     },
-    destination: {
-        type: String,
-        required: true
-    },
     file_type: {
         type: String,
         required: true

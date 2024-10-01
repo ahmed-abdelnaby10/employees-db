@@ -36,7 +36,7 @@ export const addEmployeeController = async (req: Request, res: Response) => {
         let media = null
 
         if (req.file) {
-            media = formatMediaFile(req.file as Express.Multer.File)
+            media = formatMediaFile(req.file)
         }
 
         const newEmployee = new Employee({
