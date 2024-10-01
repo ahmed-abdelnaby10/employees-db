@@ -12,11 +12,11 @@ import {
 
 const router = Router()
 
-router.route('/employees')
+router.route('/')
     .get(authVerification, getAllEmloyeesController)
     .post(authVerification, uploadImage().single('media'), addEmployeeController)
 
-router.route('/employees/:employeeId')
+router.route('/:employeeId')
     .delete(authVerification, allowedTo(userRoles.MANAGER), deleteEmployeeController)
     .patch(authVerification, allowedTo(userRoles.MANAGER), uploadImage().single('media'), updateEmployeeController)
 

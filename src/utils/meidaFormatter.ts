@@ -4,7 +4,7 @@ dotenv.config();
 
 const previewUrl = process.env.NODE_ENV === "production" ? `${process.env.PROD_URL}` : `${process.env.DEV_URL}`
 
-export const formatMediaFile = (file: Express.Multer.File): {
+export const formatMediaFile = (file: any): {
     file_type: string, 
     original_url: string,
     preview_url: string,
@@ -15,8 +15,8 @@ export const formatMediaFile = (file: Express.Multer.File): {
     mime_type: string
 } => {
     return {
-        original_url: `/public/images/${file.filename}`,
-        preview_url: `${previewUrl}/public/images/${file.filename}`,
+        original_url: `/images/${file.filename}`,
+        preview_url: `${previewUrl}/images/${file.filename}`,
         destination: file.destination,
         file_type: file.mimetype.split('/')[0],
         file_name: file.filename,
