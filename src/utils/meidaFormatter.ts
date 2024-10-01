@@ -16,7 +16,7 @@ export const formatMediaFile = (file: any): {
 } => {
     return {
         original_url: `/images/${file.filename}`,
-        preview_url: `${previewUrl}/images/${file.filename}`,
+        preview_url: `${previewUrl}/public/images/${file.filename}`,
         destination: file.destination,
         file_type: file.mimetype.split('/')[0],
         file_name: file.filename,

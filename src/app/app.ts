@@ -24,7 +24,7 @@ const __dirname = dirname(__filename)
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/images', express.static(join(__dirname, '..', '..', 'public', 'images')));
+app.use('/public/images', express.static(join(__dirname, '..', '..', 'public', 'images')));
 
 // Routes
 app.use('/api/auth', usersRouter);
