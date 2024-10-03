@@ -14,7 +14,7 @@ import { getAllUsersController } from "../controllers/users/getUsers.controller"
 
 const router = Router()
 
-router.post('/register', uploadImage().single('media'), registerController)
+router.post('/register', registerController)
 router.post('/login', loginController);
 
 router.route('/users')

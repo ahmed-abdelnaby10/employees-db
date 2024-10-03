@@ -1,11 +1,7 @@
-// import { Request, Response } from 'express';
-// import { formatResponse } from './formatResponse.js';
-// import { httpStatus } from './httpStatusText.js';
 import { formatResponse } from './formatResponse.js';
 import { httpStatus } from './httpStatusText.js';
 export const checkRequiredFields = (req, res, fields) => {
     const body = req.body;
-    // Helper function to access nested fields
     const getNestedValue = (field, data) => {
         const fieldParts = field.split('.');
         let value = data;

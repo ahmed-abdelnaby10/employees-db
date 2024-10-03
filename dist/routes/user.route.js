@@ -8,7 +8,7 @@ import { userRoles } from '../utils/userRoles.js';
 import { changePasswordController, deleteUserController, updateUserController } from '../controllers/users/users.controller.js';
 import { getAllUsersController } from '../controllers/users/getUsers.controller.js';
 const router = Router();
-router.post('/register', uploadImage().single('media'), registerController);
+router.post('/register', registerController);
 router.post('/login', loginController);
 router.route('/users')
     .get(authVerification, allowedTo(userRoles.MANAGER), getAllUsersController);
