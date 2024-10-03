@@ -28,6 +28,8 @@ export const loginController = async (req: Request, res: Response) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                gender: user.gender,
+                phone: user.phone,
                 created_at: user.created_at,
                 updated_at: user.updated_at,
                 media: user.media
