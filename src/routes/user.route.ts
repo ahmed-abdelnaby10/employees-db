@@ -22,9 +22,9 @@ router.route('/users')
 
 router.route('/users/:userId')
     .delete(authVerification, allowedTo(userRoles.MANAGER), deleteUserController)
-    .patch(authVerification, uploadImage().single('media'), updateUserController)
+    .patch(authVerification, allowedTo(userRoles.MANAGER, userRoles.ADMIN, userRoles.USER), uploadImage().single('media'), updateUserController)
 
 router.route('/users/:userId/change-password')
-    .patch(authVerification, changePasswordController);
+    .patch(authVerification, allowedTo(userRoles.MANAGER, userRoles.ADMIN, userRoles.USER), changePasswordController);
 
 export default router
